@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        window.onload = function() {
+            var mimutes = 00;
+            var seconds = 00;
+            var milis = 00;
+            var startMins = document.getElementById("minutes");
+            var startSecs = document.getElementById("seconds");
+            var startMils = document.getElementById("milis");
+            var btstart = document.getElementById("start");
+            var btstop = document.getElementById("stop");
+            var btreset = document.getElementById("reset");
+            var Interval;
+
+            btstart.onclick = function() {
+                clearInterval(Interval);
+                Interval = setInterval(startTimer, 10);
+            }
+
+            btstop.onclick = function() {
+                clearInterval(Interval);
+            }
+
+
+            btreset.onclick = function() {
+                clearInterval(Interval);
+                mimutes = "00";
+                milis = "00";
+                seconds = "00";
+                startMils.innerHTML = milis;
+                startSecs.innerHTML = seconds;
+                startMins.innerHTML = mimutes;
+            }
+
+            function startTimer() {
+                milis++;
+
+                if (milis <= 9) {
+                    startMils.innerHTML = "0" + milis;
+                }
+
+                if (milis > 9) {
+                    startMils.innerHTML = milis;
+                }
+
+                if (milis > 99) {
+                    console.log("seconds");
+                    seconds++;
+                    startSecs.innerHTML = "0" + seconds;
+                    milis = 0;
+                    startMils.innerHTML = "0" + 0;
+                }
+
+                if (seconds > 9) {
+                    startSecs.innerHTML = seconds;
+                }
+
+                if (seconds > 59) {
+                    console.log("minutes");
+                    mimutes++;
+                    startMins.innerHTML = "0" + mimutes;
+                    milis = 0;
+                    seconds = 0;
+                    startMils.innerHTML = "0" + 0;
+                    startSecs.innerHTML = "0" + 0;
+                }
+            }
+        }
+    </script>
+    <div>
+        <p>
+            <span id="minutes">00</span>:
+            <span id="seconds">00</span>:
+            <span id="milis">00</span>
+        </p>
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+
+    </div>
+
+</body>
+
+</html>
